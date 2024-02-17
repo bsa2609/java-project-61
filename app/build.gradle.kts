@@ -1,6 +1,12 @@
 plugins {
+    application
     id("java")
 }
+
+application {
+    mainClass = "hexlet.code.App"
+}
+
 
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
