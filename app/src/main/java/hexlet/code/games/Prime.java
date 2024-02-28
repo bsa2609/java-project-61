@@ -5,8 +5,10 @@ import hexlet.code.Engine;
 import java.util.Arrays;
 
 public class Prime {
+    private static final int GAMENUMBER = 5;
+
     public static void play() {
-        Engine.play(5,
+        Engine.play(GAMENUMBER,
                 "Answer 'yes' if given number is prime. Otherwise answer 'no'.",
                 false);
     }

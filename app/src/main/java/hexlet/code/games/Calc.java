@@ -3,8 +3,11 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 
 public class Calc {
+    private static final int GAMENUMBER = 2;
+
     public static void play() {
-        Engine.play(2,
+
+        Engine.play(GAMENUMBER,
                 "What is the result of the expression?",
                 true);
     }
@@ -51,7 +54,11 @@ public class Calc {
 
     private static int getSecondNumber(int mathOperationNumber) {
         final int minNumber = 1;
-        final int maxNumber = (mathOperationNumber == 3 ? 10 : 100);
+        final int maxNumberForMultiplication = 10;
+        final int maxNumberForOtherOperations = 100;
+        final int multiplicationOperationNumber = 3;
+        final int maxNumber = (mathOperationNumber == multiplicationOperationNumber
+                ? maxNumberForMultiplication : maxNumberForOtherOperations);
         return Engine.random(minNumber, maxNumber);
     }
 }

@@ -5,8 +5,10 @@ import hexlet.code.Engine;
 import java.util.StringJoiner;
 
 public class Progression {
+    private static final int GAMENUMBER = 4;
+
     public static void play() {
-        Engine.play(4,
+        Engine.play(GAMENUMBER,
                 "What number is missing in the progression?",
                 true);
     }

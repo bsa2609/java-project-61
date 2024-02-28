@@ -3,8 +3,10 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 
 public class Even {
+    private static final int GAMENUMBER = 1;
+
     public static void play() {
-        Engine.play(1,
+        Engine.play(GAMENUMBER,
                 "Answer 'yes' if the number is even, otherwise answer 'no'.",
                 false);
     }

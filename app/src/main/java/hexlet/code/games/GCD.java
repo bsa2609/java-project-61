@@ -3,8 +3,10 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 
 public class GCD {
+    private static final int GAMENUMBER = 3;
+
     public static void play() {
-        Engine.play(3,
+        Engine.play(GAMENUMBER,
                 "Find the greatest common divisor of given numbers.",
                 true);
     }
