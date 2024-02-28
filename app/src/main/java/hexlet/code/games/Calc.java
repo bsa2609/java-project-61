@@ -1,60 +1,28 @@
 package hexlet.code.games;
 
-import hexlet.code.App;
 import hexlet.code.Engine;
 
 public class Calc {
-    private static String task;
-    private static boolean isIntAnswer;
-    private static int roundsCount;
-
     public static void play() {
-        initialize();
-
-        System.out.println(task);
-
-        int roundCounter = 0;
-        boolean isCorrectAllAnswers = true;
-
-        do {
-            String[] questionAndCorrectAnswer = generateQuestionAndCorrectAnswer();
-            String question = questionAndCorrectAnswer[0];
-            String correctAnswer = questionAndCorrectAnswer[1];
-
-            String usersAnswer = Engine.getAnswerOnQuestion(question, isIntAnswer);
-
-            boolean isCorrectAnswer = Engine.checkAnswerAndOutputResult(usersAnswer, correctAnswer);
-            if (!isCorrectAnswer) {
-                isCorrectAllAnswers = false;
-            }
-
-            roundCounter++;
-        } while (roundCounter < roundsCount && isCorrectAllAnswers);
-
-        Engine.outputGameResult(isCorrectAllAnswers);
+        Engine.play(2,
+                "What is the result of the expression?",
+                true);
     }
 
-    private static void initialize() {
-        task = "What is the result of the expression?";
-        roundsCount = App.getRoundsCount();
-        isIntAnswer = true;
-    }
-
-    private static String[] generateQuestionAndCorrectAnswer() {
-        int mathOperationNumber = Engine.random(1, 3);
-        int maxSecondNumber = (mathOperationNumber == 3 ? 10 : 100);
-        int firstNumber = Engine.random(1, 100);
-        int secondNumber = Engine.random(1, maxSecondNumber);
+    public static String[] generateQuestionAndCorrectAnswer() {
+        int mathOperationNumber = getMathOperationNumber();
+        int firstNumber = getFirstNumber();
+        int secondNumber = getSecondNumber(mathOperationNumber);
 
         char mathOperation;
         int correctAnswerNumber;
 
-        switch (mathOperationNumber) {
-            case 2:
+        switch (Engine.intToChar(mathOperationNumber)) {
+            case '2':
                 mathOperation = '-';
                 correctAnswerNumber = firstNumber - secondNumber;
                 break;
-            case 3:
+            case '3':
                 mathOperation = '*';
                 correctAnswerNumber = firstNumber * secondNumber;
                 break;
@@ -67,5 +35,23 @@ public class Calc {
         String correctAnswer = Integer.toString(correctAnswerNumber);
 
         return new String[]{question, correctAnswer};
+    }
+
+    private static int getMathOperationNumber() {
+        final int minMathOperationNumber = 1;
+        final int maxMathOperationNumber = 3;
+        return Engine.random(minMathOperationNumber, maxMathOperationNumber);
+    }
+
+    private static int getFirstNumber() {
+        final int minNumber = 1;
+        final int maxNumber = 100;
+        return Engine.random(minNumber, maxNumber);
+    }
+
+    private static int getSecondNumber(int mathOperationNumber) {
+        final int minNumber = 1;
+        final int maxNumber = (mathOperationNumber == 3 ? 10 : 100);
+        return Engine.random(minNumber, maxNumber);
     }
 }

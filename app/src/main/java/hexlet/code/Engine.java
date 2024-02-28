@@ -1,5 +1,11 @@
 package hexlet.code;
 
+import hexlet.code.games.Calc;
+import hexlet.code.games.Even;
+import hexlet.code.games.GCD;
+import hexlet.code.games.Prime;
+import hexlet.code.games.Progression;
+
 import java.util.Scanner;
 
 public class Engine {
@@ -14,7 +20,7 @@ public class Engine {
         int number = 0;
         boolean isNumber = false;
 
-        int triesCount = 10;
+        final int triesCount = 10;
         int tryCounter = 0;
 
         do {
@@ -72,5 +78,60 @@ public class Engine {
 
     public static int random(int minValue, int maxValue) {
         return (int) (Math.round(Math.random() * (maxValue - minValue)) + minValue);
+    }
+
+    public static char intToChar(int number) {
+        return Integer.toString(number).charAt(0);
+    }
+
+    public static void play(int gameNumber, String task, boolean isIntAnswer) {
+        System.out.println(task);
+
+        final int roundsCount = App.getRoundscount();
+        int roundCounter = 0;
+        boolean isCorrectAllAnswers = true;
+
+        do {
+            String[] questionAndCorrectAnswer = generateQuestionAndCorrectAnswer(gameNumber);
+            String question = questionAndCorrectAnswer[0];
+            String correctAnswer = questionAndCorrectAnswer[1];
+
+            String usersAnswer = getAnswerOnQuestion(question, isIntAnswer);
+
+            boolean isCorrectAnswer = checkAnswerAndOutputResult(usersAnswer, correctAnswer);
+            if (!isCorrectAnswer) {
+                isCorrectAllAnswers = false;
+            }
+
+            roundCounter++;
+        } while (roundCounter < roundsCount && isCorrectAllAnswers);
+
+        outputGameResult(isCorrectAllAnswers);
+    }
+
+    public static String[] generateQuestionAndCorrectAnswer(int gameNumber) {
+        String[] questionAndCorrectAnswer = new String[2];
+
+        switch (intToChar(gameNumber)) {
+            case '1':
+                questionAndCorrectAnswer = Even.generateQuestionAndCorrectAnswer();
+                break;
+            case '2':
+                questionAndCorrectAnswer = Calc.generateQuestionAndCorrectAnswer();
+                break;
+            case '3':
+                questionAndCorrectAnswer = GCD.generateQuestionAndCorrectAnswer();
+                break;
+            case '4':
+                questionAndCorrectAnswer = Progression.generateQuestionAndCorrectAnswer();
+                break;
+            case '5':
+                questionAndCorrectAnswer = Prime.generateQuestionAndCorrectAnswer();
+                break;
+            default:
+                // nothing
+        }
+
+        return questionAndCorrectAnswer;
     }
 }

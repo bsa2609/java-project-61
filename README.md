@@ -33,7 +33,7 @@ make run
 make lint
 ```
 
-## Demo recordings:
+## Demo recordings
 
 ### Greeting
 [Greet](https://asciinema.org/a/iF6OGsvDsj9Ey8an3qLfePmgp)

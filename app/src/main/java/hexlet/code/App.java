@@ -11,56 +11,31 @@ import java.util.Scanner;
 public class App {
     private static Scanner scanner;
     private static String userName;
-    private static int roundsCount;
-    private static String[] games;
+    private static final int ROUNDSCOUNT = 3;
+    private static final String[] GAMES = new String[]{"Even", "Calc", "GCD", "Progression", "Prime"};
 
     public static void main(String[] args) {
-        initialize();
-
-        outputListOfGames();
+        outputListOfActions();
 
         setScanner();
 
-        int gameNumber = inputGameNumber();
+        int actionNumber = inputActionNumber();
 
-        if (gameNumber >= 0 && gameNumber <= games.length) {
+        if (actionNumber >= 1 && actionNumber <= (GAMES.length + 1)) {
             outputGreetingAndInputUserName();
-        }
-
-        switch (gameNumber) {
-            case 1:
-                Even.play();
-                break;
-            case 2:
-                Calc.play();
-                break;
-            case 3:
-                GCD.play();
-                break;
-            case 4:
-                Progression.play();
-                break;
-            case 5:
-                Prime.play();
-                break;
-            default:
-                // nothing
+            playSelectedGame(actionNumber - 1);
         }
 
         closeScanner();
     }
 
-    private static void initialize() {
-        games = new String[]{"Even", "Calc", "GCD", "Progression", "Prime"};
-        roundsCount = 3;
-    }
-
-    private static void outputListOfGames() {
+    private static void outputListOfActions() {
         System.out.println("Please enter the game number and press Enter.");
         System.out.println("1 - Greet");
 
-        for (int gameCounter = 0; gameCounter < games.length; gameCounter++) {
-            System.out.println(Integer.toString(gameCounter + 2) + " - " + games[gameCounter]);
+        for (int gameCounter = 0; gameCounter < GAMES.length; gameCounter++) {
+            int itemNumber = gameCounter + 2;
+            System.out.println(itemNumber + " - " + GAMES[gameCounter]);
         }
 
         System.out.println("0 - Exit");
@@ -79,10 +54,9 @@ public class App {
         scanner.close();
     }
 
-    private static int inputGameNumber() {
+    private static int inputActionNumber() {
         System.out.print("Your choice: ");
-        int itemNumber = Engine.inputNumber();
-        return itemNumber - 1;
+        return Engine.inputNumber();
     }
 
     private static void outputGreetingAndInputUserName() {
@@ -94,6 +68,28 @@ public class App {
         System.out.println("Hello, " + userName + "!");
     }
 
+    public static void playSelectedGame(int gameNumber) {
+        switch (Engine.intToChar(gameNumber)) {
+            case '1':
+                Even.play();
+                break;
+            case '2':
+                Calc.play();
+                break;
+            case '3':
+                GCD.play();
+                break;
+            case '4':
+                Progression.play();
+                break;
+            case '5':
+                Prime.play();
+                break;
+            default:
+                // nothing
+        }
+    }
+
     private static void setUserName() {
         userName = Engine.inputText();
     }
@@ -102,7 +98,7 @@ public class App {
         return userName;
     }
 
-    public static int getRoundsCount() {
-        return roundsCount;
+    public static int getRoundscount() {
+        return ROUNDSCOUNT;
     }
 }
