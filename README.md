@@ -36,24 +36,29 @@ make lint
 ## Demo recordings
 
 ### Greeting
-[Greet](https://asciinema.org/a/iF6OGsvDsj9Ey8an3qLfePmgp)
+[![Greet](https://asciinema.org/a/iF6OGsvDsj9Ey8an3qLfePmgp.svg)](https://asciinema.org/a/iF6OGsvDsj9Ey8an3qLfePmgp)
 
 ### Game "Even"
-[Even win](https://asciinema.org/a/YIe6LqcDhMdsGF9HrglmUC5e7)\
-[Even lose](https://asciinema.org/a/8spHQQefQ51eFJmjedgfXXse2)
+[![Even win](https://asciinema.org/a/YIe6LqcDhMdsGF9HrglmUC5e7.svg)](https://asciinema.org/a/YIe6LqcDhMdsGF9HrglmUC5e7)
+
+[![Even lose](https://asciinema.org/a/8spHQQefQ51eFJmjedgfXXse2.svg)](https://asciinema.org/a/8spHQQefQ51eFJmjedgfXXse2)
 
 ### Game "Calc"
-[Calc win](https://asciinema.org/a/QaCUWwR2HH2QeYJEckiNVcdlv)\
-[Calc lose](https://asciinema.org/a/pvAVtWzCPtZzXbGXSXwPdzh7I)
+[![Calc win](https://asciinema.org/a/QaCUWwR2HH2QeYJEckiNVcdlv.svg)](https://asciinema.org/a/QaCUWwR2HH2QeYJEckiNVcdlv)
+
+[![Calc lose](https://asciinema.org/a/pvAVtWzCPtZzXbGXSXwPdzh7I.svg)](https://asciinema.org/a/pvAVtWzCPtZzXbGXSXwPdzh7I)
 
 ### Game "GCD"
-[GCD win](https://asciinema.org/a/2NBWzAgSArVcjo7iRiwm5705V)\
-[GCD lose](https://asciinema.org/a/f6VViDvSYHvrDpiAMcyznajsx)
+[![GCD win](https://asciinema.org/a/2NBWzAgSArVcjo7iRiwm5705V.svg)](https://asciinema.org/a/2NBWzAgSArVcjo7iRiwm5705V)
+
+[![GCD lose](https://asciinema.org/a/f6VViDvSYHvrDpiAMcyznajsx.svg)](https://asciinema.org/a/f6VViDvSYHvrDpiAMcyznajsx)
 
 ### Game "Progression"
-[Progression win](https://asciinema.org/a/nzYxACP9dlzrRiokeV2s8RigW)\
-[Progression lose](https://asciinema.org/a/YqDtempuo8CgiyiPcd0OgfRXh)
+[![Progression win](https://asciinema.org/a/nzYxACP9dlzrRiokeV2s8RigW.svg)](https://asciinema.org/a/nzYxACP9dlzrRiokeV2s8RigW)
+
+[![Progression lose](https://asciinema.org/a/YqDtempuo8CgiyiPcd0OgfRXh.svg)](https://asciinema.org/a/YqDtempuo8CgiyiPcd0OgfRXh)
 
 ### Game "Prime"
-[Prime win](https://asciinema.org/a/phI0Vdv0pXDZwl5PRpn4250CP)\
-[Prime lose](https://asciinema.org/a/V5xL5nZodt72QfceVqThwNiTM)
+[![Prime win](https://asciinema.org/a/phI0Vdv0pXDZwl5PRpn4250CP.svg)](https://asciinema.org/a/phI0Vdv0pXDZwl5PRpn4250CP)
+
+[![Prime lose](https://asciinema.org/a/V5xL5nZodt72QfceVqThwNiTM.svg)](https://asciinema.org/a/V5xL5nZodt72QfceVqThwNiTM) 
