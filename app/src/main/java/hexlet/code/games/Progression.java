@@ -1,69 +1,52 @@
 package hexlet.code.games;
 
+import hexlet.code.App;
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 import java.util.StringJoiner;
 
 public class Progression {
-    private static final int GAMENUMBER = 4;
+    private static final String TASK = "What number is missing in the progression?";
+    private static final boolean IS_INT_ANSWER = true;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 10;
+    private static final int MIN_STEP = 1;
+    private static final int MAX_STEP = 10;
+    private static final int MIN_NUMBERS_COUNT = 5;
+    private static final int MAX_NUMBERS_COUNT = 15;
+    private static final int MIN_MISSING_NUMBER = 2;
 
     public static void play() {
-        Engine.play(GAMENUMBER,
-                "What number is missing in the progression?",
-                true);
-    }
+        int roundsCount = App.getRoundsCount();
 
-    public static String[] generateQuestionAndCorrectAnswer() {
-        int currentNumber = getFirstNumber();
-        int step = getStep();
-        int numbersCount = getNumbersCount();
-        int missingNumber = getMissingNumber(numbersCount);
+        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
-        String missingElement = "";
+        for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
+            int currentNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
+            int step = Utils.getRandomInt(MIN_STEP, MAX_STEP);
+            int numbersCount = Utils.getRandomInt(MIN_NUMBERS_COUNT, MAX_NUMBERS_COUNT);
+            int missingNumber = Utils.getRandomInt(MIN_MISSING_NUMBER, numbersCount);
 
-        StringJoiner questionJoiner = new StringJoiner(" ");
+            String missingElement = "";
 
-        for (int numberCounter = 1; numberCounter <= numbersCount; numberCounter++) {
-            String progressionElement = Integer.toString(currentNumber);
+            StringJoiner questionJoiner = new StringJoiner(" ");
 
-            if (numberCounter == missingNumber) {
-                missingElement = progressionElement;
-                progressionElement = "..";
-            } else {
-                progressionElement = Integer.toString(currentNumber);
+            for (int numberCounter = 1; numberCounter <= numbersCount; numberCounter++) {
+                if (numberCounter == missingNumber) {
+                    missingElement = Integer.toString(currentNumber);
+                    questionJoiner.add("..");
+                } else {
+                    questionJoiner.add(Integer.toString(currentNumber));
+                }
+
+                currentNumber += step;
             }
 
-            questionJoiner.add(progressionElement);
-
-            currentNumber += step;
+            questionsAndCorrectAnswers[roundCounter][0] = questionJoiner.toString();
+            questionsAndCorrectAnswers[roundCounter][1] = missingElement;
         }
 
-        String question = questionJoiner.toString();
-        String correctAnswer = missingElement;
-
-        return new String[]{question, correctAnswer};
-    }
-
-    private static int getFirstNumber() {
-        final int minNumber = 1;
-        final int maxNumber = 10;
-        return Engine.random(minNumber, maxNumber);
-    }
-
-    private static int getStep() {
-        final int minStep = 1;
-        final int maxStep = 10;
-        return Engine.random(minStep, maxStep);
-    }
-
-    private static int getNumbersCount() {
-        final int minNumbersCount = 5;
-        final int maxNumbersCount = 15;
-        return Engine.random(minNumbersCount, maxNumbersCount);
-    }
-
-    private static int getMissingNumber(int maxMissingNumber) {
-        final int minMissingNumber = 2;
-        return Engine.random(minMissingNumber, maxMissingNumber);
+        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
     }
 }

@@ -1,39 +1,34 @@
 package hexlet.code.games;
 
+import hexlet.code.App;
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class GCD {
-    private static final int GAMENUMBER = 3;
+    private static final String TASK = "Find the greatest common divisor of given numbers.";
+    private static final boolean IS_INT_ANSWER = true;
+    private static final int MIN_MULTIPLIER = 2;
+    private static final int MAX_MULTIPLIER = 10;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 10;
 
     public static void play() {
-        Engine.play(GAMENUMBER,
-                "Find the greatest common divisor of given numbers.",
-                true);
-    }
+        int roundsCount = App.getRoundsCount();
 
-    public static String[] generateQuestionAndCorrectAnswer() {
-        int multiplier = getMultiplier();
-        int firstNumber = getNumber(multiplier);
-        int secondNumber = getNumber(multiplier);
+        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
-        int gcd = calculateGCD(firstNumber, secondNumber);
+        for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
+            int multiplier = Utils.getRandomInt(MIN_MULTIPLIER, MAX_MULTIPLIER);
+            int firstNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER) * multiplier;
+            int secondNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER) * multiplier;
 
-        String question = firstNumber + " " + secondNumber;
-        String correctAnswer = Integer.toString(gcd);
+            int gcd = calculateGCD(firstNumber, secondNumber);
 
-        return new String[]{question, correctAnswer};
-    }
+            questionsAndCorrectAnswers[roundCounter][0] = firstNumber + " " + secondNumber;
+            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(gcd);
+        }
 
-    private static int getMultiplier() {
-        final int minMultiplier = 2;
-        final int maxMultiplier = 10;
-        return Engine.random(minMultiplier, maxMultiplier);
-    }
-
-    private static int getNumber(int multiplier) {
-        final int minNumber = 1;
-        final int maxNumber = 10;
-        return Engine.random(minNumber, maxNumber) * multiplier;
+        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
     }
 
     private static int calculateGCD(int firstNumber, int secondNumber) {

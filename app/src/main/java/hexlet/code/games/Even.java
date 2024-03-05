@@ -1,29 +1,28 @@
 package hexlet.code.games;
 
+import hexlet.code.App;
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Even {
-    private static final int GAMENUMBER = 1;
+    private static final String TASK = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+    private static final boolean IS_INT_ANSWER = false;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 100;
 
     public static void play() {
-        Engine.play(GAMENUMBER,
-                "Answer 'yes' if the number is even, otherwise answer 'no'.",
-                false);
-    }
+        int roundsCount = App.getRoundsCount();
 
-    public static String[] generateQuestionAndCorrectAnswer() {
-        int number = getNumber();
-        boolean isEvenNumber = (number % 2 == 0);
+        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
-        String question = Integer.toString(number);
-        String correctAnswer = (isEvenNumber ? "yes" : "no");
+        for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
+            int number = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
+            boolean isEvenNumber = (number % 2 == 0);
 
-        return new String[]{question, correctAnswer};
-    }
+            questionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
+            questionsAndCorrectAnswers[roundCounter][1] = (isEvenNumber ? "yes" : "no");
+        }
 
-    private static int getNumber() {
-        final int minNumber = 1;
-        final int maxNumber = 100;
-        return Engine.random(minNumber, maxNumber);
+        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
     }
 }

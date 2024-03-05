@@ -1,50 +1,48 @@
 package hexlet.code.games;
 
+import hexlet.code.App;
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 import java.util.Arrays;
 
 public class Prime {
-    private static final int GAMENUMBER = 5;
+    private static final String TASK = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
+    private static final boolean IS_INT_ANSWER = false;
+    private static final int MIN_PRIME = 2;
+    private static final int PRIMES_COUNT = 200;
 
     public static void play() {
-        Engine.play(GAMENUMBER,
-                "Answer 'yes' if given number is prime. Otherwise answer 'no'.",
-                false);
+        int roundsCount = App.getRoundsCount();
+
+        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
+
+        int[] primes = createPrimesArray();
+
+        for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
+            int number = Utils.getRandomInt(MIN_PRIME, primes[primes.length - 1]);
+            boolean isPrimeNumber = (Arrays.binarySearch(primes, number) >= 0);
+
+            questionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
+            questionsAndCorrectAnswers[roundCounter][1] = (isPrimeNumber ? "yes" : "no");
+        }
+
+        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
     }
 
-    public static String[] generateQuestionAndCorrectAnswer() {
-        final int primesCount = 200;
-        int[] primes = getPrimes(primesCount);
+    private static int[] createPrimesArray() {
+        int[] primes = new int[PRIMES_COUNT];
 
-        int number = getNumber(primes[primes.length - 1]);
-        boolean isPrimeNumber = (Arrays.binarySearch(primes, number) >= 0);
+        primes[0] = MIN_PRIME;
 
-        String question = Integer.toString(number);
-        String correctAnswer = (isPrimeNumber ? "yes" : "no");
-
-        return new String[]{question, correctAnswer};
-    }
-
-    private static int getNumber(int maxNumber) {
-        final int minNumber = 2;
-        return Engine.random(minNumber, maxNumber);
-    }
-
-    private static int[] getPrimes(int primesCount) {
-        int[] primes = new int[primesCount];
-
-        final int firstPrimeNumber = 2;
-        primes[0] = firstPrimeNumber;
-
-        for (int primeCounter = 1; primeCounter < primesCount; primeCounter++) {
-            primes[primeCounter] = getNextPrime(primes[primeCounter - 1]);
+        for (int primeCounter = 1; primeCounter < PRIMES_COUNT; primeCounter++) {
+            primes[primeCounter] = calculateFollowingPrime(primes[primeCounter - 1]);
         }
 
         return primes;
     }
 
-    private static int getNextPrime(int previousPrime) {
+    private static int calculateFollowingPrime(int previousPrime) {
         int number = previousPrime;
         boolean isNumberPrime;
 

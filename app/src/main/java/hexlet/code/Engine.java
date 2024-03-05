@@ -1,22 +1,71 @@
 package hexlet.code;
 
-import hexlet.code.games.Calc;
-import hexlet.code.games.Even;
-import hexlet.code.games.GCD;
-import hexlet.code.games.Prime;
-import hexlet.code.games.Progression;
-
 import java.util.Scanner;
 
 public class Engine {
+    private static Scanner scanner;
+    private static String userName;
+
+    public static int greetingsAndInputGameNumber(String[] games) {
+        outputListOfActions(games);
+
+        setScanner();
+
+        int actionNumber = inputActionNumber();
+        int gameNumber = 0;
+
+        if (actionNumber >= 1 && actionNumber <= (games.length + 1)) {
+            greetings();
+            gameNumber = actionNumber - 1;
+        }
+
+        if (gameNumber < 1 || gameNumber > games.length) {
+            closeScanner();
+        }
+
+        return gameNumber;
+    }
+
+    private static void outputListOfActions(String[] games) {
+        System.out.println("Please enter the game number and press Enter.");
+        System.out.println("1 - Greet");
+
+        for (int gameCounter = 0; gameCounter < games.length; gameCounter++) {
+            int itemNumber = gameCounter + 2;
+            System.out.println(itemNumber + " - " + games[gameCounter]);
+        }
+
+        System.out.println("0 - Exit");
+    }
+
+    private static void setScanner() {
+        scanner = new Scanner(System.in);
+        scanner.useDelimiter("\n");
+    }
+
+    private static void closeScanner() {
+        scanner.close();
+    }
+
+    private static void greetings() {
+        System.out.println("\nWelcome to the Brain Games!");
+        System.out.print("May I have your name? ");
+
+        userName = inputText();
+
+        System.out.println("Hello, " + userName + "!");
+    }
+
+    private static int inputActionNumber() {
+        System.out.print("Your choice: ");
+        return inputNumber();
+    }
+
     public static String inputText() {
-        Scanner scanner = App.getScanner();
         return scanner.next();
     }
 
     public static int inputNumber() {
-        Scanner scanner = App.getScanner();
-
         int number = 0;
         boolean isNumber = false;
 
@@ -70,31 +119,22 @@ public class Engine {
 
     public static void outputGameResult(boolean isCorrectAllAnswers) {
         if (isCorrectAllAnswers) {
-            System.out.println("Congratulations, " + App.getUserName() + "!");
+            System.out.println("Congratulations, " + userName + "!");
         } else {
-            System.out.println("Let's try again, " + App.getUserName() + "!");
+            System.out.println("Let's try again, " + userName + "!");
         }
     }
 
-    public static int random(int minValue, int maxValue) {
-        return (int) (Math.round(Math.random() * (maxValue - minValue)) + minValue);
-    }
-
-    public static char intToChar(int number) {
-        return Integer.toString(number).charAt(0);
-    }
-
-    public static void play(int gameNumber, String task, boolean isIntAnswer) {
+    public static void play(String[][] questionsAndCorrectAnswers, String task, boolean isIntAnswer) {
         System.out.println(task);
 
-        final int roundsCount = App.getRoundscount();
+        int roundsCount = questionsAndCorrectAnswers.length;
         int roundCounter = 0;
         boolean isCorrectAllAnswers = true;
 
         do {
-            String[] questionAndCorrectAnswer = generateQuestionAndCorrectAnswer(gameNumber);
-            String question = questionAndCorrectAnswer[0];
-            String correctAnswer = questionAndCorrectAnswer[1];
+            String question = questionsAndCorrectAnswers[roundCounter][0];
+            String correctAnswer = questionsAndCorrectAnswers[roundCounter][1];
 
             String usersAnswer = getAnswerOnQuestion(question, isIntAnswer);
 
@@ -107,31 +147,7 @@ public class Engine {
         } while (roundCounter < roundsCount && isCorrectAllAnswers);
 
         outputGameResult(isCorrectAllAnswers);
-    }
 
-    public static String[] generateQuestionAndCorrectAnswer(int gameNumber) {
-        String[] questionAndCorrectAnswer = new String[2];
-
-        switch (intToChar(gameNumber)) {
-            case '1':
-                questionAndCorrectAnswer = Even.generateQuestionAndCorrectAnswer();
-                break;
-            case '2':
-                questionAndCorrectAnswer = Calc.generateQuestionAndCorrectAnswer();
-                break;
-            case '3':
-                questionAndCorrectAnswer = GCD.generateQuestionAndCorrectAnswer();
-                break;
-            case '4':
-                questionAndCorrectAnswer = Progression.generateQuestionAndCorrectAnswer();
-                break;
-            case '5':
-                questionAndCorrectAnswer = Prime.generateQuestionAndCorrectAnswer();
-                break;
-            default:
-                // nothing
-        }
-
-        return questionAndCorrectAnswer;
+        closeScanner();
     }
 }

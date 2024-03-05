@@ -1,64 +1,57 @@
 package hexlet.code.games;
 
+import hexlet.code.App;
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Calc {
-    private static final int GAMENUMBER = 2;
+    private static final String TASK = "What is the result of the expression?";
+    private static final boolean IS_INT_ANSWER = true;
+    private static final int MIN_MATH_OPERATION_NUMBER = 1;
+    private static final int MAX_MATH_OPERATION_NUMBER = 3;
+    private static final int MULTIPLICATION_OPERATION_NUMBER = 3;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 100;
+    private static final int MAX_NUMBER_FOR_MULTIPLICATION = 10;
 
     public static void play() {
+        int roundsCount = App.getRoundsCount();
 
-        Engine.play(GAMENUMBER,
-                "What is the result of the expression?",
-                true);
-    }
+        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
-    public static String[] generateQuestionAndCorrectAnswer() {
-        int mathOperationNumber = getMathOperationNumber();
-        int firstNumber = getFirstNumber();
-        int secondNumber = getSecondNumber(mathOperationNumber);
+        for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
+            int mathOperationNumber = Utils.getRandomInt(MIN_MATH_OPERATION_NUMBER, MAX_MATH_OPERATION_NUMBER);
+            int firstNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
+            int secondNumber = generateSecondNumber(mathOperationNumber);
 
-        char mathOperation;
-        int correctAnswerNumber;
+            char mathOperation;
+            int correctAnswerNumber;
 
-        switch (Engine.intToChar(mathOperationNumber)) {
-            case '2':
-                mathOperation = '-';
-                correctAnswerNumber = firstNumber - secondNumber;
-                break;
-            case '3':
-                mathOperation = '*';
-                correctAnswerNumber = firstNumber * secondNumber;
-                break;
-            default:
-                mathOperation = '+';
-                correctAnswerNumber = firstNumber + secondNumber;
+            switch (Integer.toString(mathOperationNumber)) {
+                case "2":
+                    mathOperation = '-';
+                    correctAnswerNumber = firstNumber - secondNumber;
+                    break;
+                case "3":
+                    mathOperation = '*';
+                    correctAnswerNumber = firstNumber * secondNumber;
+                    break;
+                default:
+                    mathOperation = '+';
+                    correctAnswerNumber = firstNumber + secondNumber;
+            }
+
+            questionsAndCorrectAnswers[roundCounter][0] = firstNumber + " " + mathOperation + " " + secondNumber;
+            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(correctAnswerNumber);
         }
 
-        String question = firstNumber + " " + mathOperation + " " + secondNumber;
-        String correctAnswer = Integer.toString(correctAnswerNumber);
-
-        return new String[]{question, correctAnswer};
+        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
     }
 
-    private static int getMathOperationNumber() {
-        final int minMathOperationNumber = 1;
-        final int maxMathOperationNumber = 3;
-        return Engine.random(minMathOperationNumber, maxMathOperationNumber);
-    }
-
-    private static int getFirstNumber() {
-        final int minNumber = 1;
-        final int maxNumber = 100;
-        return Engine.random(minNumber, maxNumber);
-    }
-
-    private static int getSecondNumber(int mathOperationNumber) {
-        final int minNumber = 1;
-        final int maxNumberForMultiplication = 10;
-        final int maxNumberForOtherOperations = 100;
-        final int multiplicationOperationNumber = 3;
-        final int maxNumber = (mathOperationNumber == multiplicationOperationNumber
-                ? maxNumberForMultiplication : maxNumberForOtherOperations);
-        return Engine.random(minNumber, maxNumber);
+    private static int generateSecondNumber(int mathOperationNumber) {
+        final int maximumNumberDependingOnMathOperation = (
+                mathOperationNumber == MULTIPLICATION_OPERATION_NUMBER
+                ? MAX_NUMBER_FOR_MULTIPLICATION : MAX_NUMBER);
+        return Utils.getRandomInt(MIN_NUMBER, maximumNumberDependingOnMathOperation);
     }
 }
