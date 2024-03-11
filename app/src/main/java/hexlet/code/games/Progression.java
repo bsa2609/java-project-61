@@ -1,6 +1,5 @@
 package hexlet.code.games;
 
-import hexlet.code.App;
 import hexlet.code.Engine;
 import hexlet.code.Utils;
 
@@ -8,9 +7,8 @@ import java.util.StringJoiner;
 
 public class Progression {
     private static final String TASK = "What number is missing in the progression?";
-    private static final boolean IS_INT_ANSWER = true;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 10;
+    private static final int MIN_FIRST_NUMBER = 1;
+    private static final int MAX_FIRST_NUMBER = 10;
     private static final int MIN_STEP = 1;
     private static final int MAX_STEP = 10;
     private static final int MIN_NUMBERS_COUNT = 5;
@@ -18,12 +16,12 @@ public class Progression {
     private static final int MIN_MISSING_NUMBER = 2;
 
     public static void play() {
-        int roundsCount = App.getRoundsCount();
+        int roundsCount = Engine.getRoundsCount();
 
         String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
         for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
-            int currentNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
+            int currentNumber = Utils.getRandomInt(MIN_FIRST_NUMBER, MAX_FIRST_NUMBER);
             int step = Utils.getRandomInt(MIN_STEP, MAX_STEP);
             int numbersCount = Utils.getRandomInt(MIN_NUMBERS_COUNT, MAX_NUMBERS_COUNT);
             int missingNumber = Utils.getRandomInt(MIN_MISSING_NUMBER, numbersCount);
@@ -47,6 +45,6 @@ public class Progression {
             questionsAndCorrectAnswers[roundCounter][1] = missingElement;
         }
 
-        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
+        Engine.play(questionsAndCorrectAnswers, TASK);
     }
 }

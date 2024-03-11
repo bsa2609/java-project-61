@@ -1,6 +1,5 @@
 package hexlet.code.games;
 
-import hexlet.code.App;
 import hexlet.code.Engine;
 import hexlet.code.Utils;
 
@@ -8,12 +7,11 @@ import java.util.Arrays;
 
 public class Prime {
     private static final String TASK = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
-    private static final boolean IS_INT_ANSWER = false;
     private static final int MIN_PRIME = 2;
     private static final int PRIMES_COUNT = 200;
 
     public static void play() {
-        int roundsCount = App.getRoundsCount();
+        int roundsCount = Engine.getRoundsCount();
 
         String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
@@ -27,7 +25,7 @@ public class Prime {
             questionsAndCorrectAnswers[roundCounter][1] = (isPrimeNumber ? "yes" : "no");
         }
 
-        Engine.play(questionsAndCorrectAnswers, TASK, IS_INT_ANSWER);
+        Engine.play(questionsAndCorrectAnswers, TASK);
     }
 
     private static int[] createPrimesArray() {
@@ -49,14 +47,14 @@ public class Prime {
         do {
             number++;
             isNumberPrime = true;
-            int divider = 2;
+            int maxDivider = number / 2;
 
-            do {
+            for (int divider = 2; divider <= maxDivider; divider++) {
                 if (number % divider == 0) {
                     isNumberPrime = false;
+                    break;
                 }
-                divider++;
-            } while (divider < number && isNumberPrime);
+            }
         } while (!isNumberPrime);
 
         return number;

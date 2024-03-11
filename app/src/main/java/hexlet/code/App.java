@@ -6,36 +6,50 @@ import hexlet.code.games.GCD;
 import hexlet.code.games.Prime;
 import hexlet.code.games.Progression;
 
+import java.util.Scanner;
+
 public class App {
-    private static final int ROUNDS_COUNT = 3;
-    private static final String[] GAMES = new String[]{"Even", "Calc", "GCD", "Progression", "Prime"};
-
     public static void main(String[] args) {
-        int gameNumber = Engine.greetingsAndInputGameNumber(GAMES);
+        System.out.println("Please enter the game number and press Enter.");
+        System.out.println("1 - Greet");
+        System.out.println("2 - Even");
+        System.out.println("3 - Calc");
+        System.out.println("4 - GCD");
+        System.out.println("5 - Progression");
+        System.out.println("6 - Prime");
+        System.out.println("0 - Exit");
+        System.out.print("Your choice: ");
 
-        switch (Integer.toString(gameNumber)) {
+        Scanner scanner = new Scanner(System.in);
+        scanner.useDelimiter("\n");
+
+        String selectedItemNumber = scanner.next();
+
+        switch (selectedItemNumber) {
+            case "0":
+                // Exit
+                break;
             case "1":
-                Even.play();
+                // Only  greeting
+                Engine.play();
                 break;
             case "2":
-                Calc.play();
+                Even.play();
                 break;
             case "3":
-                GCD.play();
+                Calc.play();
                 break;
             case "4":
-                Progression.play();
+                GCD.play();
                 break;
             case "5":
+                Progression.play();
+                break;
+            case "6":
                 Prime.play();
                 break;
             default:
-                // The game number is not specified or is specified incorrectly.
-                // No actions are performed.
+                System.out.println("Unknown game number: " + selectedItemNumber);
         }
-    }
-
-    public static int getRoundsCount() {
-        return ROUNDS_COUNT;
     }
 }
