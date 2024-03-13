@@ -21,30 +21,43 @@ public class Progression {
         String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
         for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
-            int currentNumber = Utils.getRandomInt(MIN_FIRST_NUMBER, MAX_FIRST_NUMBER);
+            int firstNumber = Utils.getRandomInt(MIN_FIRST_NUMBER, MAX_FIRST_NUMBER);
             int step = Utils.getRandomInt(MIN_STEP, MAX_STEP);
             int numbersCount = Utils.getRandomInt(MIN_NUMBERS_COUNT, MAX_NUMBERS_COUNT);
-            int missingNumber = Utils.getRandomInt(MIN_MISSING_NUMBER, numbersCount);
 
-            String missingElement = "";
+            int[] progression = createProgression(firstNumber, step, numbersCount);
 
-            StringJoiner questionJoiner = new StringJoiner(" ");
+            int indexOfMissingNumber = Utils.getRandomInt(MIN_MISSING_NUMBER, progression.length) - 1;
 
-            for (int numberCounter = 1; numberCounter <= numbersCount; numberCounter++) {
-                if (numberCounter == missingNumber) {
-                    missingElement = Integer.toString(currentNumber);
-                    questionJoiner.add("..");
-                } else {
-                    questionJoiner.add(Integer.toString(currentNumber));
-                }
-
-                currentNumber += step;
-            }
-
-            questionsAndCorrectAnswers[roundCounter][0] = questionJoiner.toString();
-            questionsAndCorrectAnswers[roundCounter][1] = missingElement;
+            questionsAndCorrectAnswers[roundCounter][0] = createProgressionViewWithMissingNumber(
+                    progression, indexOfMissingNumber);
+            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(progression[indexOfMissingNumber]);
         }
 
         Engine.play(questionsAndCorrectAnswers, TASK);
+    }
+
+    private static int[] createProgression(int firstNumber, int step, int numbersCount) {
+        int[] progression = new int[numbersCount];
+
+        progression[0] = firstNumber;
+
+        for (int indexOfNumber = 1; indexOfNumber < numbersCount; indexOfNumber++) {
+            progression[indexOfNumber] = progression[indexOfNumber - 1] + step;
+        }
+
+        return progression;
+    }
+
+    private static String createProgressionViewWithMissingNumber(int[] progression, int indexOfMissingNumber) {
+        StringJoiner progressionViewJoiner = new StringJoiner(" ");
+
+        for (int indexOfNumber = 0; indexOfNumber < progression.length; indexOfNumber++) {
+            String elementOfProgressionView = (indexOfNumber == indexOfMissingNumber)
+                    ? ".." : Integer.toString(progression[indexOfNumber]);
+            progressionViewJoiner.add(elementOfProgressionView);
+        }
+
+        return progressionViewJoiner.toString();
     }
 }

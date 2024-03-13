@@ -15,11 +15,6 @@ public class Engine {
         String userName = scanner.next();
 
         System.out.println("Hello, " + userName + "!");
-
-        if (questionsAndCorrectAnswers.length == 0 || task.isBlank()) {
-            return;
-        }
-
         System.out.println(task);
 
         boolean isCorrectAllAnswers = true;
@@ -33,9 +28,7 @@ public class Engine {
 
             String usersAnswer = scanner.next();
 
-            boolean isCorrectAnswer = usersAnswer.equalsIgnoreCase(correctAnswer);
-
-            if (isCorrectAnswer) {
+            if (usersAnswer.equalsIgnoreCase(correctAnswer)) {
                 System.out.println("Correct!");
             } else {
                 System.out.println("'" + usersAnswer + "' is wrong answer ;(. Correct answer was '"
@@ -51,10 +44,8 @@ public class Engine {
         } else {
             System.out.println("Let's try again, " + userName + "!");
         }
-    }
 
-    public static void play() {
-        play(new String[0][0], "");
+        scanner.close();
     }
 
     public static int getRoundsCount() {

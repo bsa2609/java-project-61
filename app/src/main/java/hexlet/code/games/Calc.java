@@ -21,30 +21,34 @@ public class Calc {
 
             int firstNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
             int secondNumber = Utils.getRandomInt(MIN_NUMBER,
-                    mathOperation == '*' ? MAX_NUMBER_FOR_MULTIPLICATION : MAX_NUMBER);
-
-            int correctAnswerNumber;
-
-
-            switch (mathOperation) {
-                case '+':
-                    correctAnswerNumber = firstNumber + secondNumber;
-                    break;
-                case '-':
-                    correctAnswerNumber = firstNumber - secondNumber;
-                    break;
-                case '*':
-                    correctAnswerNumber = firstNumber * secondNumber;
-                    break;
-                default:
-                    throw new RuntimeException("There is no algorithm for processing the mathematical operation: "
-                            + mathOperation);
-            }
+                    (mathOperation == '*') ? MAX_NUMBER_FOR_MULTIPLICATION : MAX_NUMBER);
 
             questionsAndCorrectAnswers[roundCounter][0] = firstNumber + " " + mathOperation + " " + secondNumber;
-            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(correctAnswerNumber);
+            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(
+                    calculateValueOfMathematicalExpression(firstNumber, secondNumber, mathOperation));
         }
 
         Engine.play(questionsAndCorrectAnswers, TASK);
+    }
+
+    private static int calculateValueOfMathematicalExpression(int firstNumber, int secondNumber, char mathOperation) {
+        int valueOfMathematicalExpression;
+
+        switch (mathOperation) {
+            case '+':
+                valueOfMathematicalExpression = firstNumber + secondNumber;
+                break;
+            case '-':
+                valueOfMathematicalExpression = firstNumber - secondNumber;
+                break;
+            case '*':
+                valueOfMathematicalExpression = firstNumber * secondNumber;
+                break;
+            default:
+                throw new RuntimeException("There is no algorithm for processing the mathematical operation: "
+                        + mathOperation);
+        }
+
+        return valueOfMathematicalExpression;
     }
 }

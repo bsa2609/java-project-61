@@ -31,7 +31,7 @@ public class App {
                 break;
             case "1":
                 // Only  greeting
-                Engine.play();
+                Cli.greetings();
                 break;
             case "2":
                 Even.play();

@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class Cli {
     public static void greetings() {
-        System.out.println("Welcome to the Brain Games!");
+        Scanner scanner = new Scanner(System.in);
+        scanner.useDelimiter("\n");
+
+        System.out.println("\nWelcome to the Brain Games!");
         System.out.print("May I have your name? ");
 
-        Scanner scanner = new Scanner(System.in);
         String userName = scanner.next();
 
         System.out.println("Hello, " + userName + "!");

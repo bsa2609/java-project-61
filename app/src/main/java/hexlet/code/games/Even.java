@@ -15,12 +15,15 @@ public class Even {
 
         for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
             int number = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
-            boolean isEvenNumber = (number % 2 == 0);
 
             questionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
-            questionsAndCorrectAnswers[roundCounter][1] = (isEvenNumber ? "yes" : "no");
+            questionsAndCorrectAnswers[roundCounter][1] = isEvenNumber(number) ? "yes" : "no";
         }
 
         Engine.play(questionsAndCorrectAnswers, TASK);
+    }
+
+    private static boolean isEvenNumber(int number) {
+        return number % 2 == 0;
     }
 }
