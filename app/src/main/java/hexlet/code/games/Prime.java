@@ -26,8 +26,6 @@ public class Prime {
     private static boolean isPrimeNumber(int number) {
         if (number <= 1) {
             return false;
-        } else if (number <= 3) {
-            return true;
         }
 
         int maxDivider = number / 2;

@@ -25,26 +25,26 @@ public class GCD {
     }
 
     private static int calculateGCD(int firstNumber, int secondNumber) {
-        if (firstNumber == secondNumber) {
-            return  firstNumber;
-        } else if (firstNumber == 1 || secondNumber == 1) {
-            return  1;
-        } else if (firstNumber % secondNumber == 0) {
-            return secondNumber;
-        } else if (secondNumber % firstNumber == 0) {
-            return firstNumber;
-        }
-
         int gcd = 1;
 
-        int minNumber = Math.min(firstNumber, secondNumber);
-        int maxNumber = Math.max(firstNumber, secondNumber);
-        int halfMaxNumber = maxNumber / 2;
-        int maxPossibleGCD = Math.min(minNumber, halfMaxNumber);
+        if (firstNumber == secondNumber) {
+            gcd =  firstNumber;
+        } else if (firstNumber == 1 || secondNumber == 1) {
+            gcd =  1;
+        } else if (firstNumber % secondNumber == 0) {
+            gcd = secondNumber;
+        } else if (secondNumber % firstNumber == 0) {
+            gcd = firstNumber;
+        } else {
+            int minNumber = Math.min(firstNumber, secondNumber);
+            int maxNumber = Math.max(firstNumber, secondNumber);
+            int halfMaxNumber = maxNumber / 2;
+            int maxPossibleGCD = Math.min(minNumber, halfMaxNumber);
 
-        for (int possibleGCD = 1; possibleGCD <= maxPossibleGCD; possibleGCD++) {
-            if (firstNumber % possibleGCD == 0 && secondNumber % possibleGCD == 0) {
-                gcd = possibleGCD;
+            for (int possibleGCD = 1; possibleGCD <= maxPossibleGCD; possibleGCD++) {
+                if (firstNumber % possibleGCD == 0 && secondNumber % possibleGCD == 0) {
+                    gcd = possibleGCD;
+                }
             }
         }
 
