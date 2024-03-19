@@ -23,6 +23,12 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         String gameNumber = scanner.next();
 
+        play(gameNumber);
+
+        scanner.close();
+    }
+
+    private static void play(String gameNumber) {
         switch (gameNumber) {
             case "0":
                 break;
@@ -47,7 +53,5 @@ public class App {
             default:
                 System.out.println("Unknown game number: " + gameNumber);
         }
-
-        scanner.close();
     }
 }

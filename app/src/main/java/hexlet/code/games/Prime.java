@@ -11,16 +11,16 @@ public class Prime {
     public static void play() {
         int roundsCount = Engine.getRoundsCount();
 
-        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
+        String[][] primeQuestionsAndCorrectAnswers = new String[roundsCount][2];
 
         for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
             int number = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
 
-            questionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
-            questionsAndCorrectAnswers[roundCounter][1] = isPrimeNumber(number) ? "yes" : "no";
+            primeQuestionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
+            primeQuestionsAndCorrectAnswers[roundCounter][1] = isPrimeNumber(number) ? "yes" : "no";
         }
 
-        Engine.play(questionsAndCorrectAnswers, TASK);
+        Engine.play(primeQuestionsAndCorrectAnswers, TASK);
     }
 
     private static boolean isPrimeNumber(int number) {
