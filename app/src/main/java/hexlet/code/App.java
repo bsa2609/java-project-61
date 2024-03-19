@@ -21,16 +21,12 @@ public class App {
         System.out.print("Your choice: ");
 
         Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
+        String gameNumber = scanner.next();
 
-        String selectedItemNumber = scanner.next();
-
-        switch (selectedItemNumber) {
+        switch (gameNumber) {
             case "0":
-                // Exit
                 break;
             case "1":
-                // Only  greeting
                 Cli.greetings();
                 break;
             case "2":
@@ -49,7 +45,9 @@ public class App {
                 Prime.play();
                 break;
             default:
-                System.out.println("Unknown game number: " + selectedItemNumber);
+                System.out.println("Unknown game number: " + gameNumber);
         }
+
+        scanner.close();
     }
 }

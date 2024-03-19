@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Cli {
     public static void greetings() {
         Scanner scanner = new Scanner(System.in);
-        scanner.useDelimiter("\n");
 
         System.out.println("\nWelcome to the Brain Games!");
         System.out.print("May I have your name? ");

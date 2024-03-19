@@ -18,36 +18,16 @@ public class GCD {
             int secondNumber = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
 
             questionsAndCorrectAnswers[roundCounter][0] = firstNumber + " " + secondNumber;
-            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(calculateGCD(firstNumber, secondNumber));
+            questionsAndCorrectAnswers[roundCounter][1] = Integer.toString(gcd(firstNumber, secondNumber));
         }
 
         Engine.play(questionsAndCorrectAnswers, TASK);
     }
 
-    private static int calculateGCD(int firstNumber, int secondNumber) {
-        int gcd = 1;
+    private static int gcd(int firstNumber, int secondNumber) {
+        int minNumber = Math.min(firstNumber, secondNumber);
+        int maxNumber = Math.max(firstNumber, secondNumber);
 
-        if (firstNumber == secondNumber) {
-            gcd =  firstNumber;
-        } else if (firstNumber == 1 || secondNumber == 1) {
-            gcd =  1;
-        } else if (firstNumber % secondNumber == 0) {
-            gcd = secondNumber;
-        } else if (secondNumber % firstNumber == 0) {
-            gcd = firstNumber;
-        } else {
-            int minNumber = Math.min(firstNumber, secondNumber);
-            int maxNumber = Math.max(firstNumber, secondNumber);
-            int halfMaxNumber = maxNumber / 2;
-            int maxPossibleGCD = Math.min(minNumber, halfMaxNumber);
-
-            for (int possibleGCD = 1; possibleGCD <= maxPossibleGCD; possibleGCD++) {
-                if (firstNumber % possibleGCD == 0 && secondNumber % possibleGCD == 0) {
-                    gcd = possibleGCD;
-                }
-            }
-        }
-
-        return gcd;
+        return (minNumber == 0) ? maxNumber : gcd(minNumber, maxNumber % minNumber);
     }
 }

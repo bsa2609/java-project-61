@@ -28,9 +28,7 @@ public class Prime {
             return false;
         }
 
-        int maxDivider = number / 2;
-
-        for (int divider = 2; divider <= maxDivider; divider++) {
+        for (int divider = 2; divider <= Math.sqrt(number); divider++) {
             if (number % divider == 0) {
                 return false;
             }
