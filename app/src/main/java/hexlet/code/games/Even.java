@@ -11,16 +11,16 @@ public class Even {
     public static void play() {
         int roundsCount = Engine.getRoundsCount();
 
-        String[][] evenQuestionsAndCorrectAnswers = new String[roundsCount][2];
+        String[][] questionsAndCorrectAnswers = new String[roundsCount][2];
 
         for (int roundCounter = 0; roundCounter < roundsCount; roundCounter++) {
             int number = Utils.getRandomInt(MIN_NUMBER, MAX_NUMBER);
 
-            evenQuestionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
-            evenQuestionsAndCorrectAnswers[roundCounter][1] = isEvenNumber(number) ? "yes" : "no";
+            questionsAndCorrectAnswers[roundCounter][0] = Integer.toString(number);
+            questionsAndCorrectAnswers[roundCounter][1] = isEvenNumber(number) ? "yes" : "no";
         }
 
-        Engine.play(evenQuestionsAndCorrectAnswers, TASK);
+        Engine.play(questionsAndCorrectAnswers, TASK);
     }
 
     private static boolean isEvenNumber(int number) {
