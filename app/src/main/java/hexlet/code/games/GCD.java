@@ -25,9 +25,6 @@ public class GCD {
     }
 
     private static int gcd(int firstNumber, int secondNumber) {
-        int minNumber = Math.min(firstNumber, secondNumber);
-        int maxNumber = Math.max(firstNumber, secondNumber);
-
-        return (minNumber == 0) ? maxNumber : gcd(minNumber, maxNumber % minNumber);
+        return (secondNumber == 0) ? firstNumber : gcd(secondNumber, firstNumber % secondNumber);
     }
 }

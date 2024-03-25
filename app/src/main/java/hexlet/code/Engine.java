@@ -16,24 +16,26 @@ public class Engine {
         System.out.println("Hello, " + userName + "!");
         System.out.println(task);
 
-        boolean isCorrectAllAnswers = true;
-
         for (String[] questionAndCorrectAnswer : questionsAndCorrectAnswers) {
             System.out.println("Question: " + questionAndCorrectAnswer[0]);
             System.out.print("Your answer: ");
 
             String usersAnswer = scanner.next();
 
-            isCorrectAllAnswers = usersAnswer.equalsIgnoreCase(questionAndCorrectAnswer[1]);
-            System.out.println(isCorrectAllAnswers ? "Correct!" : "'" + usersAnswer
-                    + "' is wrong answer ;(. Correct answer was '" + questionAndCorrectAnswer[1] + "'.");
+            if (usersAnswer.equalsIgnoreCase(questionAndCorrectAnswer[1])) {
+                System.out.println("Correct!");
 
-            if (!isCorrectAllAnswers) {
-                break;
+            } else {
+                System.out.println("'" + usersAnswer + "' is wrong answer ;(. Correct answer was '"
+                        + questionAndCorrectAnswer[1] + "'.");
+                System.out.println("Let's try again, " + userName + "!");
+
+                scanner.close();
+                return;
             }
         }
 
-        System.out.println((isCorrectAllAnswers ? "Congratulations, " : "Let's try again, ") + userName + "!");
+        System.out.println("Congratulations, " + userName + "!");
 
         scanner.close();
     }
